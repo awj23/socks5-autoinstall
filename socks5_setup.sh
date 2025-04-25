@@ -72,7 +72,7 @@ setuid 65535
 stacksize 6291456
 flush
 auth strong
-users admin:CL:pass
+users user:CL:pass
 allow user
 socks -p2000
 EOF
