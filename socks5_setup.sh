@@ -72,9 +72,9 @@ setuid 65535
 stacksize 6291456
 flush
 auth strong
-users admin:CL:password
-allow admin
-socks -p1080
+users admin:CL:pass
+allow user
+socks -p2000
 EOF
 
     # 创建systemd服务
@@ -102,10 +102,10 @@ EOF
 configure_firewall(){
     echo -e "${GREEN}配置防火墙...${PLAIN}"
     if [[ ${release} == "centos" ]]; then
-        firewall-cmd --permanent --add-port=1080/tcp
+        firewall-cmd --permanent --add-port=2000/tcp
         firewall-cmd --reload
     else
-        ufw allow 1080/tcp
+        ufw allow 2000/tcp
         ufw reload
     fi
 }
@@ -122,9 +122,9 @@ main(){
     echo -e "${GREEN}安装完成！${PLAIN}"
     echo -e "${YELLOW}Socks5代理服务器信息：${PLAIN}"
     echo -e "IP地址：$(curl -s ifconfig.me)"
-    echo -e "端口：1080"
-    echo -e "用户名：admin"
-    echo -e "密码：password"
+    echo -e "端口：2000"
+    echo -e "用户名：user"
+    echo -e "密码：pass"
     echo -e "\n${YELLOW}使用以下命令管理服务：${PLAIN}"
     echo -e "启动：systemctl start 3proxy"
     echo -e "停止：systemctl stop 3proxy"
